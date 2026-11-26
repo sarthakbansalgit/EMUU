@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Heart | Our Love Story</title>
+    <link href="css/default.css?v=font-update" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/music-sync.js"></script>
+</head>
+<body class="heart-page">
+    <audio id="heartSong" autoplay loop preload="auto" playsinline>
+        <source src="LIGHT%20IT%20UP.mp3" type="audio/mpeg">
+    </audio>
+    <button id="heartMusicToggle" class="heart-music-toggle" type="button" aria-pressed="false"
+        aria-label="Play Light It Up">
+        <span aria-hidden="true">♫</span><span id="heartMusicLabel">Play song</span>
+    </button>
+    <header class="heart-heading">
+        <span class="heart-eyebrow">OUR FAVORITE CHAPTER</span>
+        <h1>A heart made for <em>us</em></h1>
+        <p>Watch our little garden bloom.</p>
+        <a class="heart-scroll-cue" href="#loveHeart">
+            <span>SCROLL TO THE HEART</span>
+            <strong aria-hidden="true">↓</strong>
+        </a>
+    </header>
+
+    <div id="mainDiv">
+        <div id="content">
+            <div class="heart-copy-column">
+              <div id="code" class="love-letter-code">
+                <span class="letter-kicker">A little note from my heart</span><br>
+                <span class="letter-line">emilyy,</span><br>
+                <span class="letter-line">you are the softest part of my every day.</span><br>
+                <span class="letter-line">In your smile, I found my favorite place</span><br>
+                <span class="letter-line">in your presence, I found home.</span><br>
+                <span class="letter-line">So yes, I have fallen for you—</span><br>
+                <span class="letter-line">not just once, but a little more</span><br>
+                <span class="letter-line">with every sunrise, every laugh,</span><br>
+                <span class="letter-line">and every quiet moment we share.</span><br>
+                <span class="letter-ending">If life is a story, you are my favorite chapter. and always will</span>
+              </div>
+              <a class="heart-next-cue" href="#loveHeart" aria-label="Scroll down to our heart">
+                <span>KEEP SCROLLING</span>
+                <strong aria-hidden="true">↓</strong>
+              </a>
+              <section class="heart-writing-card" aria-label="A space for your message">
+                <span class="writing-kicker">A few more words for you</span>
+                <p class="writing-line">Although I do not know what I mean to you, in this short time you have moved me as a person so much. Your presence matters to me. I stare into those eyes because they are as deep as the moon. I love when you sit in my lap and hug me tight while I slowly pat your head, my hands gently moving through your hair.</p>
+                <p class="writing-line">I do not know what the future holds, but I know none can replace you in me. Maybe I will update this website accordingly. Longue vie à emilyy :3</p>
+                <p class="writing-signature">— from my heart to yours ♡</p>
+              </section>
+            </div>
+            <div id="loveHeart">
+                <canvas id="garden"></canvas>
+                <div id="words">
+                    <div id="messages">
+                        <div id="elapseClock"></div>
+                    </div>
+                    <div id="loveu">
+                        <div class="signature">This heart will run forever</div>
+                        <div class="signature">by sarthak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="next-step">
+        <button id="nextButton" class="next-button" type="button">Next <span>→</span></button>
+    </div>
+    <div id="feedbackModal" class="feedback-modal" role="dialog" aria-modal="true"
+        aria-labelledby="feedbackTitle" aria-describedby="feedbackText" hidden>
+        <div class="feedback-card">
+            <button id="feedbackClose" class="feedback-close" type="button" aria-label="Close">×</button>
+            <span class="feedback-sparkle">✦</span>
+            <h2 id="feedbackTitle">Did you like it, emilyy?</h2>
+            <p id="feedbackText">This little universe was made just for you.</p>
+            <div id="feedbackActions" class="feedback-actions">
+                <button class="feedback-choice" type="button" data-answer="yes">Yes, I loved it</button>
+                <button class="feedback-choice feedback-choice-soft" type="button" data-answer="no">No</button>
+            </div>
+            <div id="feelingForm" class="feeling-form" hidden>
+                <a class="feedback-submit" href="https://www.instagram.com/sarthak7633/" target="_blank"
+                    rel="noopener noreferrer">Text me on Insta what you felt ♡</a>
+            </div>
+            <p id="feedbackResult" class="feedback-result" role="status" aria-live="polite"></p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var offsetX;
+        var offsetY;
+        var together = new Date();
+        together.setFullYear(2026, 10, 18);
+        together.setHours(0, 0, 0, 0);
+
+        if (!document.createElement("canvas").getContext) {
+            var msg = document.createElement("div");
+            msg.id = "errorMsg";
+            msg.innerHTML = "Your browser does not support HTML5 canvas.";
+            document.body.appendChild(msg);
+            $("#code").css("display", "none");
+        } else {
+            function centerHeart() {
+                offsetX = $("#garden").width() / 2;
+                offsetY = $("#garden").height() / 2;
+            }
+            getHeartPoint = function (angle) {
+                var radians = angle / Math.PI;
+                var isMobile = gardenCanvas.width < 600;
+                var size = isMobile ? 0.88 : 1.1;
+                var heightSize = isMobile ? 0.82 : 1;
+                var scale = Math.min(size, gardenCanvas.width / 670 * size, gardenCanvas.height / 625 * heightSize);
+                var x = scale * 19.5 * (16 * Math.pow(Math.sin(radians), 3));
+                var y = scale * -20 * (13 * Math.cos(radians) - 5 * Math.cos(2 * radians) -
+                    2 * Math.cos(3 * radians) - Math.cos(4 * radians));
+                return [offsetX + x, offsetY + y];
+            };
+            centerHeart();
+            setTimeout(startHeartAnimation, 1500);
+            timeElapse(together);
+            setInterval(function () { timeElapse(together); }, 500);
+            adjustCodePosition();
+            $(window).resize(centerHeart);
+        }
+
+        (function () {
+            var song = document.getElementById("heartSong");
+            var toggle = document.getElementById("heartMusicToggle");
+            var label = document.getElementById("heartMusicLabel");
+            if (!song || !toggle || !label) {
+                return;
+            }
+            function updateMusicState(isPlaying) {
+                toggle.classList.toggle("heart-music-playing", isPlaying);
+                toggle.setAttribute("aria-pressed", String(isPlaying));
+                toggle.setAttribute("aria-label", isPlaying ? "Pause Light It Up" : "Play Light It Up");
+                label.textContent = isPlaying ? (song.muted ? "Tap for sound" : "Playing") : "Play song";
+            }
+            function tryToPlay() {
+                window.LoveMusicSync.claim("heart");
+                song.play().then(function () {
+                    updateMusicState(true);
+                }).catch(function () {
+                    song.muted = true;
+                    song.play().then(function () {
+                        updateMusicState(true);
+                    }).catch(function () {
+                        window.LoveMusicSync.release("heart");
+                        updateMusicState(false);
+                    });
+                });
+            }
+            function enableSound() {
+                if (song.paused) {
+                    tryToPlay();
+                    return;
+                }
+                song.muted = false;
+                updateMusicState(true);
+            }
+            song.addEventListener("play", function () {
+                window.LoveMusicSync.claim("heart");
+                updateMusicState(true);
+            });
+            song.addEventListener("pause", function () {
+                window.LoveMusicSync.release("heart");
+                updateMusicState(false);
+            });
+            toggle.addEventListener("click", function () {
+                if (song.paused) {
+                    song.muted = false;
+                    tryToPlay();
+                } else {
+                    song.pause();
+                }
+            });
+            ["pointerdown", "keydown", "touchstart"].forEach(function (eventName) {
+                window.addEventListener(eventName, enableSound, { once: true, passive: true });
+            });
+            window.LoveMusicSync.watch("heart", song);
+            window.addEventListener("pagehide", function () {
+                song.pause();
+                window.LoveMusicSync.release("heart");
+            });
+            tryToPlay();
+        }());
+    </script>
+    <script type="text/javascript" src="js/heart-feedback.js?v=next-fix"></script>
+</body>
+</html>

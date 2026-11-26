@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fce3ec">
+    <title>A Little Secret for Emilyy</title>
+    <link href="css/default.css?v=font-update" rel="stylesheet">
+</head>
+<body class="passcode-locked">
+    <main>
+        <section id="passcodeGate" class="passcode-gate" aria-labelledby="gateTitle">
+            <div class="passcode-card">
+                <div class="lock-icon" aria-hidden="true">
+                    <span class="lock-shackle"></span>
+                    <span class="lock-body"><span class="lock-keyhole"></span></span>
+                </div>
+                <h1 id="gateTitle">for emilyy</h1>
+                <p>A LITTLE SECRET</p>
+                <form id="passcodeForm">
+                    <label class="sr-only" for="passcode">Enter the 8-digit passcode</label>
+                    <input id="passcode" name="passcode" type="password" inputmode="numeric"
+                        autocomplete="off" maxlength="8" pattern="[0-9]{8}" placeholder="••••••••"
+                        aria-describedby="passcodeMessage" required>
+                    <button type="submit">🔐 Unlock</button>
+                    <span id="passcodeMessage" class="passcode-message" role="status"
+                        aria-live="polite"></span>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="js/passcode.js"></script>
+</body>
+</html>
